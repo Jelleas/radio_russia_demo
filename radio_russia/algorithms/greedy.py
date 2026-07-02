@@ -1,23 +1,27 @@
 import copy
 import random
 
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.node import Node
+from radio_russia.classes.transmitters import Transmitter
+
 
 class Greedy:
     """
     The Greedy class that assigns the best possible value to each node one by one.
     """
-    def __init__(self, graph, transmitters):
+    def __init__(self, graph: Graph, transmitters: list[Transmitter]) -> None:
         self.graph = copy.deepcopy(graph)
         self.transmitters = transmitters
 
-    def get_next_node(self, nodes):
+    def get_next_node(self, nodes: list[Node]) -> Node:
         """
         Gets the next node with the most neighbours and removes it from the list.
         """
         nodes.sort(key=lambda node: len(node.neighbours))
         return nodes.pop()
 
-    def run(self):
+    def run(self) -> None:
         """
         Greedily assigns the lowest costing transmitters to the nodes of the graph.
         """
@@ -43,7 +47,7 @@ class RandomGreedy(Greedy):
     """
     The Greedy class that assigns the best possible value to each node in random order.
     """
-    def get_next_node(self, nodes):
+    def get_next_node(self, nodes: list[Node]) -> Node:
         """
         Gets the next random node and removes it from the list.
         """

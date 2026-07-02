@@ -1,6 +1,9 @@
 import copy
 import random
 
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.transmitters import Transmitter
+
 from .randomise import random_reconfigure_node
 
 
@@ -9,7 +12,7 @@ class HillClimber:
     The HillClimber class that changes a random node in the graph to a random valid value. Each improvement or
     equivalent solution is kept for the next iteration.
     """
-    def __init__(self, graph, transmitters):
+    def __init__(self, graph: Graph, transmitters: list[Transmitter]) -> None:
         if not graph.is_solution():
             raise Exception("HillClimber requires a complete solution.")
 
@@ -20,7 +23,7 @@ class HillClimber:
 
         self.iterations = 0
 
-    def mutate_single_node(self, new_graph):
+    def mutate_single_node(self, new_graph: Graph) -> None:
         """
         Changes the value of a random node with a random valid value.
         """
@@ -28,14 +31,14 @@ class HillClimber:
         available_transmitters = random_node.get_possibilities(self.transmitters)
         random_reconfigure_node(new_graph, random_node, available_transmitters)
 
-    def mutate_graph(self, new_graph, number_of_nodes=1):
+    def mutate_graph(self, new_graph: Graph, number_of_nodes: int = 1) -> None:
         """
         Changes the value of a number of nodes with a random valid value.
         """
         for _ in range(number_of_nodes):
             self.mutate_single_node(new_graph)
 
-    def check_solution(self, new_graph):
+    def check_solution(self, new_graph: Graph) -> None:
         """
         Checks and accepts better solutions than the current solution.
         """
@@ -47,7 +50,7 @@ class HillClimber:
             self.graph = new_graph
             self.value = new_value
 
-    def run(self, iterations, verbose=False, mutate_nodes_number=1):
+    def run(self, iterations: int, verbose: bool = False, mutate_nodes_number: int = 1) -> None:
         """
         Runs the hillclimber algorithm for a specific amount of iterations.
         """

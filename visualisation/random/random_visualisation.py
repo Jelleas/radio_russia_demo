@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 
-def baseline_graph():
+def baseline_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/random/baseline.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')

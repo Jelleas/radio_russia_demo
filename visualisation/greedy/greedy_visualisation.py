@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 
-def random_greedy_graph():
+def random_greedy_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/greedy/random_greedy.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -15,7 +15,7 @@ def random_greedy_graph():
     fig.savefig("results/greedy/random_greedy.png")
 
 
-def base_vs_random_graph():
+def base_vs_random_graph() -> None:
     fig, ax = plt.subplots()
 
     with open("results/greedy/random_greedy.csv", 'r') as input_file:

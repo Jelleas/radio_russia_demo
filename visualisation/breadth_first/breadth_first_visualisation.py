@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import json
 
 
-def breadth_first_memory_graph():
+def breadth_first_memory_graph() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/breadth_first/breadth_first.json", 'r') as input_file:
         result = json.load(input_file)
@@ -15,7 +15,7 @@ def breadth_first_memory_graph():
     fig.savefig("results/breadth_first/breadth_first_memory.png")
 
 
-def breadth_first_table():
+def breadth_first_table() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
 
     with open("results/breadth_first/breadth_first.json", 'r') as input_file:
@@ -36,7 +36,7 @@ def breadth_first_table():
     fig.savefig("results/breadth_first/breadth_first.png")
 
 
-def constructive_comparison():
+def constructive_comparison() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     results = []
     with open("results/depth_first/depth_first.json", 'r') as input_file:
@@ -69,7 +69,7 @@ def constructive_comparison():
     fig.savefig("results/depth_first/comparison.png")
 
 
-def breadth_first_memory_comparison():
+def breadth_first_memory_comparison() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/breadth_first/breadth_first.json", 'r') as input_file:
         breadth_result = json.load(input_file)
@@ -88,7 +88,7 @@ def breadth_first_memory_comparison():
     fig.savefig("results/breadth_first/breadth_first_memory_comparison.png")
 
 
-def constructive_memory_comparison():
+def constructive_memory_comparison() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/breadth_first/breadth_first.json", 'r') as input_file:
         breadth_result = json.load(input_file)

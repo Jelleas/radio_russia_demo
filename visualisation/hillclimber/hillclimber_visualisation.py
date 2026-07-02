@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 
-def hillclimb_graph():
+def hillclimb_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/hillclimber/hillclimber.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -15,7 +15,7 @@ def hillclimb_graph():
     fig.savefig("results/hillclimber/single_run.png")
 
 
-def hillclimber_averages_graph():
+def hillclimber_averages_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/hillclimber/hillclimber_averages.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -28,7 +28,7 @@ def hillclimber_averages_graph():
     fig.savefig("results/hillclimber/hillclimber_averages.png")
 
 
-def hillclimber_averages_filled_graph():
+def hillclimber_averages_filled_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/hillclimber/hillclimber_averages.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -45,7 +45,7 @@ def hillclimber_averages_filled_graph():
     fig.savefig("results/hillclimber/hillclimber_averages_filled.png")
 
 
-def hillclimber_xopt_comparison_graph():
+def hillclimber_xopt_comparison_graph() -> None:
     fig, ax = plt.subplots()
     results = []
     for n in range(1, 6):

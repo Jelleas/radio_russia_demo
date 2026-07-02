@@ -1,6 +1,9 @@
 import random
 import math
 
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.transmitters import Transmitter
+
 from .hillclimber import HillClimber
 
 
@@ -13,7 +16,7 @@ class SimulatedAnnealing(HillClimber):
     Most of the functions are similar to those of the HillClimber class, which is why
     we use that as a parent class.
     """
-    def __init__(self, graph, transmitters, temperature=1):
+    def __init__(self, graph: Graph, transmitters: list[Transmitter], temperature: float = 1) -> None:
         # Use the init of the Hillclimber class
         super().__init__(graph, transmitters)
 
@@ -21,7 +24,7 @@ class SimulatedAnnealing(HillClimber):
         self.T0 = temperature
         self.T = temperature
 
-    def update_temperature(self):
+    def update_temperature(self) -> None:
         """
         This function implements a *linear* cooling scheme.
         Temperature will become zero after all iterations passed to the run()
@@ -35,7 +38,7 @@ class SimulatedAnnealing(HillClimber):
 
         # where alpha can be any value below 1 but above 0
 
-    def check_solution(self, new_graph):
+    def check_solution(self, new_graph: Graph) -> None:
         """
         Checks and accepts better solutions than the current solution.
         Also sometimes accepts solutions that are worse, depending on the current

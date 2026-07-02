@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 
-def simulateannealing_graph():
+def simulateannealing_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/simulatedannealing/simulatedannealing.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -15,7 +15,7 @@ def simulateannealing_graph():
     fig.savefig("results/simulatedannealing/single_run.png")
 
 
-def simulatedannealing_averages_graph():
+def simulatedannealing_averages_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/simulatedannealing/simulatedannealing_averages.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -28,7 +28,7 @@ def simulatedannealing_averages_graph():
     fig.savefig("results/simulatedannealing/simulatedannealing_averages.png")
 
 
-def simulatedannealing_averages_filled_graph():
+def simulatedannealing_averages_filled_graph() -> None:
     fig, ax = plt.subplots()
     with open("results/simulatedannealing/simulatedannealing_averages.csv", 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
@@ -45,7 +45,7 @@ def simulatedannealing_averages_filled_graph():
     fig.savefig("results/simulatedannealing/simulatedannealing_averages_filled.png")
 
 
-def simulatedannealing_temperature_comparisons_graph():
+def simulatedannealing_temperature_comparisons_graph() -> None:
     fig, ax = plt.subplots()
     results = []
     for n in range(1, 60, 10):

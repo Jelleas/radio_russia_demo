@@ -1,26 +1,29 @@
 from radio_russia.algorithms import hillclimber as hc
 from radio_russia.algorithms import randomise
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.transmitters import CostScheme
 
 import csv
 import copy
 from statistics import mean
 
 
-def hillclimb(graph, transmitters, scheme=1, iterations=1000,
-              output_file="results/hillclimber/hillclimber.csv"):
+def hillclimb(graph: Graph, transmitters: CostScheme, scheme: int = 1, iterations: int = 1000,
+              output_file: str = "results/hillclimber/hillclimber.csv") -> None:
     random_graph = randomise.random_reassignment(copy.deepcopy(graph), transmitters.get_scheme(scheme))
     climber = hc.HillClimber(random_graph, transmitters.get_scheme(scheme))
 
     print("Running Hill Climber...")
-    with open(output_file, 'w', newline='') as output_file:
-        result_writer = csv.writer(output_file, delimiter=',')
+    with open(output_file, 'w', newline='') as output_file_handle:
+        result_writer = csv.writer(output_file_handle, delimiter=',')
 
         for _ in range(0, iterations):
             climber.run(1)
             result_writer.writerow((climber.graph.calculate_value(), climber.graph.to_json()))
 
 
-def hillclimb_continue(graph, transmitters, data, scheme=1, iterations=1000):
+def hillclimb_continue(graph: Graph, transmitters: CostScheme, data: str, scheme: int = 1,
+                        iterations: int = 1000) -> None:
     with open(data, 'r') as input_file:
         result_reader = csv.reader(input_file, delimiter=',')
         *_, last = result_reader
@@ -30,15 +33,16 @@ def hillclimb_continue(graph, transmitters, data, scheme=1, iterations=1000):
     climber = hc.HillClimber(graph, transmitters.get_scheme(scheme))
 
     print("Continueing Hill Climber...")
-    with open(data, 'a', newline='') as output_file:
-        result_writer = csv.writer(output_file, delimiter=',')
+    with open(data, 'a', newline='') as output_file_handle:
+        result_writer = csv.writer(output_file_handle, delimiter=',')
 
         for _ in range(0, iterations):
             climber.run(1)
             result_writer.writerow((climber.graph.calculate_value(), climber.graph.to_json()))
 
-def hillclimber_averages(graph, transmitters, scheme=1, runs=100, iterations=1000,
-                          output_file="results/hillclimber/hillclimber_averages.csv"):
+def hillclimber_averages(graph: Graph, transmitters: CostScheme, scheme: int = 1, runs: int = 100,
+                          iterations: int = 1000,
+                          output_file: str = "results/hillclimber/hillclimber_averages.csv") -> None:
     results = []
     for i in range(0, runs):
         result = []
@@ -57,14 +61,15 @@ def hillclimber_averages(graph, transmitters, scheme=1, runs=100, iterations=100
     for iteration in zip(*results):
         values.append((mean(iteration), min(iteration), max(iteration)))
 
-    with open(output_file, 'w', newline='') as output_file:
-        result_writer = csv.writer(output_file, delimiter=',')
+    with open(output_file, 'w', newline='') as output_file_handle:
+        result_writer = csv.writer(output_file_handle, delimiter=',')
         for value in values:
             result_writer.writerow(value)
 
-def hillclimber_xopt_comparison(graph, transmitters, scheme=1, runs=100, iterations=500,
-                                 mutate_nodes_range=(1, 6),
-                                 output_file_template="results/hillclimber/hillclimber_xopt_{n}.csv"):
+def hillclimber_xopt_comparison(graph: Graph, transmitters: CostScheme, scheme: int = 1, runs: int = 100,
+                                 iterations: int = 500,
+                                 mutate_nodes_range: tuple[int, int] = (1, 6),
+                                 output_file_template: str = "results/hillclimber/hillclimber_xopt_{n}.csv") -> None:
     for n in range(*mutate_nodes_range):
         results = []
         for i in range(0, runs):
@@ -84,9 +89,7 @@ def hillclimber_xopt_comparison(graph, transmitters, scheme=1, runs=100, iterati
         for iteration in zip(*results):
             values.append((mean(iteration), min(iteration), max(iteration)))
 
-        results.append(values)
-
-        with open(output_file_template.format(n=n), 'w', newline='') as output_file:
-            result_writer = csv.writer(output_file, delimiter=',')
+        with open(output_file_template.format(n=n), 'w', newline='') as output_file_handle:
+            result_writer = csv.writer(output_file_handle, delimiter=',')
             for value in values:
                 result_writer.writerow(value)

@@ -1,15 +1,18 @@
+from __future__ import annotations
+
 import csv
 import json
 
 from .node import Node
+from .transmitters import Transmitter
 
 
 class Graph():
-    def __init__(self, source_file, geo_json=None):
+    def __init__(self, source_file: str, geo_json: str | None = None) -> None:
         self.nodes = self.load_nodes(source_file)
         self.load_neighbours(source_file)
 
-    def load_nodes(self, source_file):
+    def load_nodes(self, source_file: str) -> dict[str, Node]:
         """
         Load all the nodes into the graph.
         """
@@ -22,7 +25,7 @@ class Graph():
 
         return nodes
 
-    def load_neighbours(self, source_file):
+    def load_neighbours(self, source_file: str) -> None:
         """
         Load all the neighbours into the loaded nodes.
         """
@@ -44,7 +47,7 @@ class Graph():
                     neighbour = self.nodes[neighbour]
                     self.nodes[node_id].add_neighbour(neighbour)
 
-    def get_violations(self):
+    def get_violations(self) -> list[Node]:
         """
         Returns the ids of all nodes that have a neighbour with the same value.
         """
@@ -56,7 +59,7 @@ class Graph():
 
         return violations
 
-    def is_solution(self):
+    def is_solution(self) -> bool:
         """
         Returns True if each node in the graph is assigned a value.
         False otherwise.
@@ -67,7 +70,7 @@ class Graph():
 
         return True
 
-    def calculate_value(self):
+    def calculate_value(self) -> int:
         """
         Returns the sum of the values of all nodes.
         """
@@ -79,7 +82,7 @@ class Graph():
 
         return value
 
-    def get_empty_node(self):
+    def get_empty_node(self) -> Node | None:
         """
         Returns the first empty node.
         """
@@ -89,18 +92,18 @@ class Graph():
 
         return None
 
-    def to_json(self):
+    def to_json(self) -> str:
         """
         Serialize a graph to a JSON string.
         """
-        return json.dumps({node.id: node.value.name for node in self.nodes.values()})
+        return json.dumps({node.id: node.value.name for node in self.nodes.values() if node.value is not None})
 
-    def from_json(self, data, transmitters):
+    def from_json(self, data: str, transmitters: list[Transmitter]) -> None:
         """
         Read and assign node values from a JSON string.
         """
-        data = json.loads(data)
+        parsed_data = json.loads(data)
 
         transmitter_map = {transmitter.name: transmitter for transmitter in transmitters}
-        for node, value in data.items():
+        for node, value in parsed_data.items():
             self.nodes[node].value = transmitter_map[value]

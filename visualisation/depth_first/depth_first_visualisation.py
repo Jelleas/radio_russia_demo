@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import json
 
 
-def depth_first_memory_graph():
+def depth_first_memory_graph() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/depth_first/depth_first.json", 'r') as input_file:
         result = json.load(input_file)
@@ -15,7 +15,7 @@ def depth_first_memory_graph():
     fig.savefig("results/depth_first/depth_first_memory.png")
 
 
-def depth_first_table():
+def depth_first_table() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/depth_first/depth_first.json", 'r') as input_file:
         result = json.load(input_file)
@@ -35,7 +35,7 @@ def depth_first_table():
     fig.savefig("results/depth_first/depth_first.png")
 
 
-def depth_first_memory_comparison():
+def depth_first_memory_comparison() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
     with open("results/depth_first/depth_first.json", 'r') as input_file:
         depth_result = json.load(input_file)
@@ -49,7 +49,7 @@ def depth_first_memory_comparison():
     ax.plot(depth_result['states_sizes'], label='DepthFirst')
     ax.legend(loc='upper right')
 
-    ax.yaxis.get_major_locator().set_params(nbins=20, steps=[1, 2, 5, 10])
+    ax.yaxis.get_major_locator().set_params(nbins=20, steps=[1, 2, 5, 10])  # type: ignore[call-arg]
     ax.set_xlabel('Considered States')
     ax.set_ylabel('Number of States')
     fig.savefig("results/depth_first/depth_first_memory_comparison.png")

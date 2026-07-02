@@ -1,4 +1,5 @@
-from radio_russia.classes import graph, transmitters
+from radio_russia.classes import graph
+from radio_russia.classes import transmitters as transmitters_module
 
 from radio_russia.algorithms import randomise
 from radio_russia.algorithms import greedy as gr
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     test_graph = graph.Graph(f"data/{data_folder}/{data_folder}_regions.csv")
 
     # Create the transmitter cost schemes
-    transmitters = transmitters.CostScheme("data/transmitters.csv")
+    transmitters = transmitters_module.CostScheme("data/transmitters.csv")
 
     # --------------------------- Random reassignment --------------------------
     # random_graph = randomise.random_reassignment(test_graph,

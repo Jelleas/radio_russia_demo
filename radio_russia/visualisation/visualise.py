@@ -3,23 +3,26 @@ from bokeh.models import GeoJSONDataSource
 from bokeh.plotting import figure
 import json
 
-def visualise(graph, geo_file):
+from radio_russia.classes.graph import Graph
+
+
+def visualise(graph: Graph, geo_file: str) -> None:
     """
     Visualisation code that uses bokeh and geometry data from a JSON file
     to represent a coloured graph.
     """
     print("Loading visualisation...")
-    with open(geo_file, 'r') as geo_file:
-        data = json.load(geo_file)
+    with open(geo_file, 'r') as geo_file_handle:
+        data = json.load(geo_file_handle)
 
     # Get the nodes of the regions in order of uid.
     regions = [node for node in graph.nodes.values()]
     name = [node.id for node in regions]
-    cost = [node.value.value if node is not None else 0
+    cost = [node.value.value if node.value is not None else 0
             for node in regions]
-    colour = [node.value.colour.get_web() if node is not None else "grey"
+    colour = [node.value.colour.get_web() if node.value is not None else "grey"
               for node in regions]
-    transmitter = [node.value.name if node is not None else "None"
+    transmitter = [node.value.name if node.value is not None else "None"
                    for node in regions]
 
     for index, region in enumerate(data['features']):
@@ -41,7 +44,7 @@ def visualise(graph, geo_file):
     ]
 
     # Make Bokeh plot.
-    p = figure(background_fill_color="lightgrey", tooltips=tooltips)
+    p = figure(background_fill_color="lightgrey", tooltips=tooltips)  # type: ignore[call-arg]
     p.sizing_mode = 'scale_height'
     p.patches(xs='xs', ys='ys', fill_color='colour', line_color='black',
                 line_width=0.2, source=geo_source)

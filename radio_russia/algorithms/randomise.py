@@ -1,8 +1,12 @@
 import random
 import copy
 
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.node import Node
+from radio_russia.classes.transmitters import Transmitter
 
-def random_assignment(graph, possibilities):
+
+def random_assignment(graph: Graph, possibilities: list[Transmitter]) -> None:
     """
     Randomly assign each node with one of the possibilities.
     """
@@ -10,14 +14,14 @@ def random_assignment(graph, possibilities):
         node.value = random.choice(possibilities)
 
 
-def random_reconfigure_node(graph, node, possibilities):
+def random_reconfigure_node(graph: Graph, node: Node, possibilities: list[Transmitter]) -> None:
     """
     Takes a node and assigns each node with one of the possibilities.
     """
     node.value = random.choice(possibilities)
 
 
-def random_reconfigure_nodes(graph, nodes, possibilities):
+def random_reconfigure_nodes(graph: Graph, nodes: list[Node], possibilities: list[Transmitter]) -> None:
     """
     Takes a list of nodes and assigns each node with one of the possibilities.
     """
@@ -25,7 +29,7 @@ def random_reconfigure_nodes(graph, nodes, possibilities):
         random_reconfigure_node(graph, node, possibilities)
 
 
-def random_reassignment(graph, possibilities):
+def random_reassignment(graph: Graph, possibilities: list[Transmitter]) -> Graph:
     """
     Algorithm that reassigns nodes that are invalid until each node is valid.
 

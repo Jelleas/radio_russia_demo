@@ -1,31 +1,35 @@
 import copy
 
+from radio_russia.classes.graph import Graph
+from radio_russia.classes.node import Node
+from radio_russia.classes.transmitters import Transmitter
+
 
 class DepthFirst:
     """
     A Depth First algorithm that builds a stack of graphs with a unique assignment of nodes for each instance.
     """
-    def __init__(self, graph, transmitters):
+    def __init__(self, graph: Graph, transmitters: list[Transmitter]) -> None:
         self.graph = copy.deepcopy(graph)
         self.transmitters = transmitters
 
-        self.states = [copy.deepcopy(self.graph)]
+        self.states: list[Graph] = [copy.deepcopy(self.graph)]
 
-        self.best_solution = None
+        self.best_solution: Graph | None = None
         self.best_value = float('inf')
 
         self.visited_state_count = 0
         self.max_states_size = len(self.states)
-        self.states_sizes = []
+        self.states_sizes: list[int] = []
         self.solution_count = 0
 
-    def get_next_state(self):
+    def get_next_state(self) -> Graph:
         """
         Method that gets the next state from the list of states.
         """
         return self.states.pop()
 
-    def build_children(self, graph, node):
+    def build_children(self, graph: Graph, node: Node) -> None:
         """
         Creates all possible child-states and adds them to the list of states.
         """
@@ -38,7 +42,7 @@ class DepthFirst:
             new_graph.nodes[node.id].value = value
             self.states.append(new_graph)
 
-    def check_solution(self, new_graph):
+    def check_solution(self, new_graph: Graph) -> None:
         """
         Checks and accepts better solutions than the current solution.
         """
@@ -50,13 +54,13 @@ class DepthFirst:
             self.best_solution = new_graph
             self.best_value = new_value
 
-    def size(self):
+    def size(self) -> int:
         return len(self.states)
 
-    def done(self):
+    def done(self) -> bool:
         return self.size() == 0
-         
-    def run(self):
+
+    def run(self) -> None:
         """
         Runs the algorithm untill all possible states are visited.
         """
@@ -83,10 +87,11 @@ class DepthFirst:
                 self.check_solution(new_graph)
 
         # Update the input graph with the best result found.
+        assert self.best_solution is not None
         self.graph = self.best_solution
 
 class BranchAndBound(DepthFirst):
-    def run(self):
+    def run(self) -> None:
         """
         Runs the algorithm without visiting states worse than encountered.
         """
@@ -115,4 +120,5 @@ class BranchAndBound(DepthFirst):
                 self.check_solution(new_graph)
 
         # Update the input graph with the best result found.
+        assert self.best_solution is not None
         self.graph = self.best_solution

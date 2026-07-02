@@ -7,19 +7,22 @@ import argparse
 import importlib.util
 import json
 from pathlib import Path
+from types import ModuleType
 
 from radio_russia.classes import graph, transmitters
 
 
-def load_module(json_path):
+def load_module(json_path: Path) -> ModuleType:
     module_path = json_path.with_suffix(".py")
     spec = importlib.util.spec_from_file_location(module_path.stem, module_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load module from {module_path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
-def run_experiment(json_path):
+def run_experiment(json_path: Path) -> None:
     with open(json_path, 'r') as config_file:
         config = json.load(config_file)
 

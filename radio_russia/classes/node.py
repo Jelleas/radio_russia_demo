@@ -1,14 +1,19 @@
+from __future__ import annotations
+
+from .transmitters import Transmitter
+
+
 class Node():
-    def __init__(self, name, uid):
+    def __init__(self, name: str, uid: str) -> None:
         self.name = name
         self.id = uid
-        self.neighbours = {}
-        self.value = None
+        self.neighbours: dict[str, Node] = {}
+        self.value: Transmitter | None = None
 
-    def add_neighbour(self, node):
+    def add_neighbour(self, node: Node) -> None:
         self.neighbours[node.id] = node
 
-    def get_possibilities(self, options):
+    def get_possibilities(self, options: list[Transmitter]) -> list[Transmitter]:
         """
         Returns a list of all available values that can be assigned to this
         node, based on assigned values of neighbours.
@@ -21,7 +26,7 @@ class Node():
 
         return list(available_options - unavailable_options)
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """
         Returns whether the node is valid. A node is valid when there are no
         neighbours with the same value, and it's value is not None.
@@ -35,10 +40,10 @@ class Node():
 
         return True
 
-    def has_value(self):
+    def has_value(self) -> bool:
         return self.value is not None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Make sure that the object is printed properly if it is in a list/dict.
         """
