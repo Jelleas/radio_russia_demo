@@ -6,7 +6,7 @@ De russische overheid wil een goede verdeling van zendfrequenties. Er zijn preci
 
 ### Vereisten
 
-Deze codebase is volledig geschreven in Python 3.7. In pyproject.toml staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
+Deze codebase is volledig geschreven in Python (>=3.13). In pyproject.toml staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
 ```
 pip install -e .
@@ -14,19 +14,27 @@ pip install -e .
 
 ### Gebruik
 
-Een voorbeeldje kan gerund worden door aanroepen van:
+`main.py` heeft drie subcommando's: `algorithm`, `experiment` en `visualise`.
+
+Een los algoritme draaien op een dataset:
 
 ```
-python main.py
+python main.py algorithm hillclimber --iterations 2000 --visualise
 ```
 
-Het bestand geeft een voorbeeld voor gebruik van de verschillende functies.
+Zie `python main.py algorithm --help` voor alle beschikbare algoritmes en opties.
 
 De experimenten in `/experiments` zijn reproduceerbaar via hun bijbehorende
-JSON-configuratiebestand en `run_experiment.py`, bijvoorbeeld:
+JSON-configuratiebestand:
 
 ```
-python run_experiment.py experiments/depth_first/depth_first_experiment.json
+python main.py experiment experiments/depth_first/depth_first_experiment.json
+```
+
+De resultaten van een experiment plotten met een functie uit `/visualisation`:
+
+```
+python main.py visualise depth_first depth_first_memory_graph
 ```
 
 ### Structuur
