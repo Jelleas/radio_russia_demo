@@ -1,11 +1,11 @@
-from code.classes import graph, transmitters
+from radio_russia.classes import graph, transmitters
 
-from code.algorithms import randomise
-from code.algorithms import greedy as gr
-from code.algorithms import depth_first as df
-from code.algorithms import breadth_first as bf
-from code.algorithms import hillclimber as hc
-from code.algorithms import simulatedannealing as sa
+from radio_russia.algorithms import randomise
+from radio_russia.algorithms import greedy as gr
+from radio_russia.algorithms import depth_first as df
+from radio_russia.algorithms import breadth_first as bf
+from radio_russia.algorithms import hillclimber as hc
+from radio_russia.algorithms import simulatedannealing as sa
 
 from experiments.random import random_experiment
 from experiments.greedy import greedy_experiment
@@ -14,7 +14,7 @@ from experiments.breadth_first import breadth_first_experiment
 from experiments.hillclimber import hillclimber_experiment
 from experiments.simulatedannealing import simulatedannealing_experiment
 
-from code.visualisation import visualise as vis
+from radio_russia.visualisation import visualise as vis
 
 if __name__ == "__main__":
     # Watch out with large datafiles when running depth- and especially

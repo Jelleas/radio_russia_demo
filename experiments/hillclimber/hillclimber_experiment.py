@@ -1,5 +1,5 @@
-from code.algorithms import hillclimber as hc
-from code.algorithms import randomise
+from radio_russia.algorithms import hillclimber as hc
+from radio_russia.algorithms import randomise
 
 import matplotlib.pyplot as plt
 import csv

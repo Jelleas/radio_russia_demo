@@ -1,4 +1,4 @@
-from code.algorithms import breadth_first as bf
+from radio_russia.algorithms import breadth_first as bf
 import matplotlib.pyplot as plt
 import csv
 import json

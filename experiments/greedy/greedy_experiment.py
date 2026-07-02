@@ -1,4 +1,4 @@
-from code.algorithms import greedy as gr
+from radio_russia.algorithms import greedy as gr
 import matplotlib.pyplot as plt
 import csv
 

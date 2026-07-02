@@ -1,5 +1,5 @@
-from code.algorithms import simulatedannealing as sa
-from code.algorithms import randomise
+from radio_russia.algorithms import simulatedannealing as sa
+from radio_russia.algorithms import randomise
 
 import matplotlib.pyplot as plt
 import csv

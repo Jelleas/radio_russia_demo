@@ -1,4 +1,4 @@
-from code.algorithms import depth_first as df
+from radio_russia.algorithms import depth_first as df
 import matplotlib.pyplot as plt
 import csv
 import json
