@@ -1,6 +1,14 @@
 import matplotlib.pyplot as plt
 import json
 
+__all__ = [
+    "breadth_first_memory_graph",
+    "breadth_first_table",
+    "constructive_comparison",
+    "breadth_first_memory_comparison",
+    "constructive_memory_comparison",
+]
+
 
 def breadth_first_memory_graph() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))

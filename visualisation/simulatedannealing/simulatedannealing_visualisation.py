@@ -1,6 +1,13 @@
 import matplotlib.pyplot as plt
 import csv
 
+__all__ = [
+    "simulateannealing_graph",
+    "simulatedannealing_averages_graph",
+    "simulatedannealing_averages_filled_graph",
+    "simulatedannealing_temperature_comparisons_graph",
+]
+
 
 def simulateannealing_graph() -> None:
     fig, ax = plt.subplots()

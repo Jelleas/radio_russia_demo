@@ -1,5 +1,5 @@
 import argparse
-import importlib
+import inspect
 from pathlib import Path
 
 from radio_russia.classes.graph import Graph
@@ -12,6 +12,7 @@ from radio_russia.algorithms import hillclimber as hc
 from radio_russia.algorithms import simulatedannealing as sa
 from radio_russia.visualisation import visualise as vis
 
+import visualisation
 from run_experiment import run_experiment
 
 ALGORITHMS = [
@@ -19,10 +20,7 @@ ALGORITHMS = [
     "breadth-first", "best-first", "hillclimber", "simulated-annealing",
 ]
 
-VISUALISATION_EXPERIMENTS = [
-    "random", "greedy", "depth_first", "breadth_first", "hillclimber",
-    "simulatedannealing",
-]
+VISUALISATION_FUNCTIONS_BY_NAME = dict(inspect.getmembers(visualisation, inspect.isfunction))
 
 
 def build_graph_and_transmitters(data_folder: str, scheme: int) -> tuple[Graph, list[Transmitter]]:
@@ -85,13 +83,7 @@ def run_algorithm(args: argparse.Namespace) -> None:
 
 
 def run_visualisation(args: argparse.Namespace) -> None:
-    module = importlib.import_module(f"visualisation.{args.experiment}.{args.experiment}_visualisation")
-
-    if not hasattr(module, args.function):
-        raise ValueError(f"'{args.function}' is not a visualisation function of the '{args.experiment}' experiment.")
-
-    function = getattr(module, args.function)
-    function()
+    VISUALISATION_FUNCTIONS_BY_NAME[args.function]()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -112,7 +104,6 @@ def build_parser() -> argparse.ArgumentParser:
                                    help="Starting temperature (simulated-annealing only).")
     algorithm_parser.add_argument("--visualise", action="store_true",
                                    help="Show a bokeh visualisation of the resulting configuration.")
-    algorithm_parser.set_defaults(func=run_algorithm)
 
     experiment_parser = subparsers.add_parser("experiment", help="Run an experiment from its JSON configuration.")
     experiment_parser.add_argument("config", type=Path,
@@ -120,11 +111,8 @@ def build_parser() -> argparse.ArgumentParser:
                                          "experiments/depth_first/depth_first_experiment.json")
 
     visualise_parser = subparsers.add_parser("visualise", help="Plot the results of a previously run experiment.")
-    visualise_parser.add_argument("experiment", choices=VISUALISATION_EXPERIMENTS,
-                                   help="Name of the experiment whose results should be plotted.")
-    visualise_parser.add_argument("function",
-                                   help="Name of the visualisation function to run, e.g. "
-                                        "depth_first_memory_graph")
+    visualise_parser.add_argument("function", choices=sorted(VISUALISATION_FUNCTIONS_BY_NAME),
+                                   help="Name of the visualisation function to run.")
 
     return parser
 

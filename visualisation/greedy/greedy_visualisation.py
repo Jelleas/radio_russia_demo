@@ -1,6 +1,11 @@
 import matplotlib.pyplot as plt
 import csv
 
+__all__ = [
+    "random_greedy_graph",
+    "base_vs_random_graph",
+]
+
 
 def random_greedy_graph() -> None:
     fig, ax = plt.subplots()

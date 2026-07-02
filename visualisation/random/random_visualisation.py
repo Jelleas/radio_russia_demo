@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import csv
 
+__all__ = [
+    "baseline_graph",
+]
+
 
 def baseline_graph() -> None:
     fig, ax = plt.subplots()

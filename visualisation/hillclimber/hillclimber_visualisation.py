@@ -1,6 +1,13 @@
 import matplotlib.pyplot as plt
 import csv
 
+__all__ = [
+    "hillclimb_graph",
+    "hillclimber_averages_graph",
+    "hillclimber_averages_filled_graph",
+    "hillclimber_xopt_comparison_graph",
+]
+
 
 def hillclimb_graph() -> None:
     fig, ax = plt.subplots()

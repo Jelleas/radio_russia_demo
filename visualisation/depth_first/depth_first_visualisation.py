@@ -1,6 +1,12 @@
 import matplotlib.pyplot as plt
 import json
 
+__all__ = [
+    "depth_first_memory_graph",
+    "depth_first_table",
+    "depth_first_memory_comparison",
+]
+
 
 def depth_first_memory_graph() -> None:
     fig, ax = plt.subplots(figsize=(8, 4))
