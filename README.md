@@ -6,16 +6,10 @@ De russische overheid wil een goede verdeling van zendfrequenties. Er zijn preci
 
 ### Vereisten
 
-Deze codebase is volledig geschreven in Python 3.7. In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
+Deze codebase is volledig geschreven in Python 3.7. In pyproject.toml staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
 
 ```
-pip install -r requirements.txt
-```
-
-Of via conda:
-
-```
-conda install --file requirements.txt
+pip install -e .
 ```
 
 ### Gebruik
