@@ -22,6 +22,13 @@ python main.py
 
 Het bestand geeft een voorbeeld voor gebruik van de verschillende functies.
 
+De experimenten in `/experiments` zijn reproduceerbaar via hun bijbehorende
+JSON-configuratiebestand en `run_experiment.py`, bijvoorbeeld:
+
+```
+python run_experiment.py experiments/depth_first/depth_first_experiment.json
+```
+
 ### Structuur
 
 De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
@@ -31,6 +38,8 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
   - **/radio_russia/classes**: bevat de drie benodigde classes voor deze case
   - **/radio_russia/visualisation**: bevat de bokeh code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
+- **/experiments**: bevat de scripts en JSON-configuraties om de experimenten te draaien
+- **/visualisation**: bevat de scripts die de resultaten van de experimenten plotten
 
 ## Auteurs
 - Quinten van der Post

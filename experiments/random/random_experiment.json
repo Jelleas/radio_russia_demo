@@ -1,0 +1,13 @@
+{
+    "data_folder": "nl",
+    "scheme": 1,
+    "runs": [
+        {
+            "function": "baseline",
+            "params": {
+                "iterations": 10000,
+                "output_file": "results/random/baseline.csv"
+            }
+        }
+    ]
+}
