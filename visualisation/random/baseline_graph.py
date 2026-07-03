@@ -1,10 +1,6 @@
 import matplotlib.pyplot as plt
 import csv
 
-__all__ = [
-    "baseline_graph",
-]
-
 
 def baseline_graph() -> None:
     fig, ax = plt.subplots()
@@ -18,3 +14,7 @@ def baseline_graph() -> None:
     ax.set_xlabel('Total Costs')
     ax.set_ylabel('Number of Solutions')
     fig.savefig("results/random/baseline.png")
+
+
+if __name__ == "__main__":
+    baseline_graph()

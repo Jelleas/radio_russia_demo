@@ -1,5 +1,4 @@
 import argparse
-import inspect
 from pathlib import Path
 
 from radio_russia.classes.graph import Graph
@@ -12,15 +11,12 @@ from radio_russia.algorithms import hillclimber as hc
 from radio_russia.algorithms import simulatedannealing as sa
 from radio_russia.visualisation import visualise as vis
 
-import visualisation
 from run_experiment import run_experiment
 
 ALGORITHMS = [
     "random", "greedy", "random-greedy", "depth-first", "branch-and-bound",
     "breadth-first", "best-first", "hillclimber", "simulated-annealing",
 ]
-
-VISUALISATION_FUNCTIONS_BY_NAME = dict(inspect.getmembers(visualisation, inspect.isfunction))
 
 
 def build_graph_and_transmitters(data_folder: str, scheme: int) -> tuple[Graph, list[Transmitter]]:
@@ -82,12 +78,9 @@ def run_algorithm(args: argparse.Namespace) -> None:
         vis.visualise(result_graph, f"data/{args.data_folder}/{args.data_folder}_regions.geojson")
 
 
-def run_visualisation(args: argparse.Namespace) -> None:
-    VISUALISATION_FUNCTIONS_BY_NAME[args.function]()
-
-
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Place transmitters to broadcast radio signal into Russia.")
+    parser = argparse.ArgumentParser(prog="python -m radio_russia",
+                                      description="Place transmitters to broadcast radio signal into Russia.")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     algorithm_parser = subparsers.add_parser("algorithm", help="Run a single algorithm on a dataset.")
@@ -105,14 +98,11 @@ def build_parser() -> argparse.ArgumentParser:
     algorithm_parser.add_argument("--visualise", action="store_true",
                                    help="Show a bokeh visualisation of the resulting configuration.")
 
-    experiment_parser = subparsers.add_parser("experiment", help="Run an experiment from its JSON configuration.")
+    experiment_parser = subparsers.add_parser("experiment", help="Run an experiment from its JSON configuration "
+                                                                  "and plot its results.")
     experiment_parser.add_argument("config", type=Path,
                                     help="Path to an experiment JSON file, e.g. "
                                          "experiments/depth_first/depth_first_experiment.json")
-
-    visualise_parser = subparsers.add_parser("visualise", help="Plot the results of a previously run experiment.")
-    visualise_parser.add_argument("function", choices=sorted(VISUALISATION_FUNCTIONS_BY_NAME),
-                                   help="Name of the visualisation function to run.")
 
     return parser
 
@@ -125,7 +115,5 @@ if __name__ == "__main__":
         run_algorithm(args)
     elif args.command == "experiment":
         run_experiment(args.config)
-    elif args.command == "visualise":
-        run_visualisation(args)
     else:
         raise ValueError(f"Unknown command: {args.command}")

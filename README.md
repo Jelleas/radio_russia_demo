@@ -14,27 +14,30 @@ pip install -e .
 
 ### Gebruik
 
-`main.py` heeft drie subcommando's: `algorithm`, `experiment` en `visualise`.
+Na installatie is de package te draaien met `python -m radio_russia`, met twee
+subcommando's: `algorithm` en `experiment`.
 
 Een los algoritme draaien op een dataset:
 
 ```
-python main.py algorithm hillclimber --iterations 2000 --visualise
+python -m radio_russia algorithm hillclimber --iterations 2000 --visualise
 ```
 
-Zie `python main.py algorithm --help` voor alle beschikbare algoritmes en opties.
+Zie `python -m radio_russia algorithm --help` voor alle beschikbare algoritmes en opties.
 
 De experimenten in `/experiments` zijn reproduceerbaar via hun bijbehorende
 JSON-configuratiebestand:
 
 ```
-python main.py experiment experiments/depth_first/depth_first_experiment.json
+python -m radio_russia experiment experiments/depth_first/depth_first_experiment.json
 ```
 
-De resultaten van een experiment plotten met een functie uit `/visualisation`:
+De resultaten van een experiment worden geplot door de bijbehorende scripts in
+`/visualisation`. Elk script staat op zichzelf en is los te draaien nadat het
+experiment is uitgevoerd, bijvoorbeeld:
 
 ```
-python main.py visualise depth_first depth_first_memory_graph
+python visualisation/depth_first/depth_first_memory_graph.py
 ```
 
 ### Structuur
@@ -42,12 +45,14 @@ python main.py visualise depth_first depth_first_memory_graph
 De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
 
 - **/radio_russia**: bevat alle code van dit project
+  - **/radio_russia/\_\_main\_\_.py**: entrypoint voor `python -m radio_russia`
   - **/radio_russia/algorithms**: bevat de code voor algoritmes
   - **/radio_russia/classes**: bevat de drie benodigde classes voor deze case
   - **/radio_russia/visualisation**: bevat de bokeh code voor de visualisatie
 - **/data**: bevat de verschillende databestanden die nodig zijn om de graaf te vullen en te visualiseren
 - **/experiments**: bevat de scripts en JSON-configuraties om de experimenten te draaien
 - **/visualisation**: bevat de scripts die de resultaten van de experimenten plotten
+  - **/visualisation/comparisons**: bevat de scripts die resultaten van meerdere experimenten met elkaar vergelijken
 
 ## Auteurs
 - Quinten van der Post

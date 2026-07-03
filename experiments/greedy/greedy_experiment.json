@@ -1,6 +1,5 @@
 {
     "data_folder": "nl",
-    "scheme": 1,
     "runs": [
         {
             "function": "random_greedy",
