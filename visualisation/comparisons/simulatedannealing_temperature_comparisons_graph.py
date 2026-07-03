@@ -17,7 +17,7 @@ def simulatedannealing_temperature_comparisons_graph() -> None:
     ax.set_title('Sim Annealing Temperatures (n=100)')
     ax.set_xlabel('Iteration')
     ax.set_ylabel('Total Costs')
-    fig.savefig(f"results/simulatedannealing/simulatedannealing_temp_{n}.png")
+    fig.savefig("results/comparisons/simulatedannealing_temperature_comparisons_graph.png")
 
 
 if __name__ == "__main__":

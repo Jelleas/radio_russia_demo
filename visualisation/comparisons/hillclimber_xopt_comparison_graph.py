@@ -17,7 +17,7 @@ def hillclimber_xopt_comparison_graph() -> None:
     ax.set_title('Hill Climber X-Opts (n=100)')
     ax.set_xlabel('Iteration')
     ax.set_ylabel('Total Costs')
-    fig.savefig("results/hillclimber/hillclimber_xopt_comparison.png")
+    fig.savefig("results/comparisons/hillclimber_xopt_comparison_graph.png")
 
 
 if __name__ == "__main__":

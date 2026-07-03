@@ -18,7 +18,7 @@ def breadth_first_memory_comparison() -> None:
 
     ax.set_xlabel('Considered States')
     ax.set_ylabel('Number of States')
-    fig.savefig("results/breadth_first/breadth_first_memory_comparison.png")
+    fig.savefig("results/comparisons/breadth_first_memory_comparison.png")
 
 
 if __name__ == "__main__":

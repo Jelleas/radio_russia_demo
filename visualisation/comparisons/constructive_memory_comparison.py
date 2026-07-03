@@ -17,7 +17,7 @@ def constructive_memory_comparison() -> None:
 
     ax.set_xlabel('Considered States')
     ax.set_ylabel('Number of States')
-    fig.savefig("results/breadth_first/memory_comparison.png")
+    fig.savefig("results/comparisons/constructive_memory_comparison.png")
 
 
 if __name__ == "__main__":

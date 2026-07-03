@@ -31,8 +31,7 @@ def constructive_comparison() -> None:
         loc='upper left',
     )
     fig.tight_layout()
-    fig.savefig("results/breadth_first/comparison.png")
-    fig.savefig("results/depth_first/comparison.png")
+    fig.savefig("results/comparisons/constructive_comparison.png")
 
 
 if __name__ == "__main__":

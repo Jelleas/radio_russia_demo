@@ -19,7 +19,7 @@ def depth_first_memory_comparison() -> None:
     ax.yaxis.get_major_locator().set_params(nbins=20, steps=[1, 2, 5, 10])  # type: ignore[call-arg]
     ax.set_xlabel('Considered States')
     ax.set_ylabel('Number of States')
-    fig.savefig("results/depth_first/depth_first_memory_comparison.png")
+    fig.savefig("results/comparisons/depth_first_memory_comparison.png")
 
 
 if __name__ == "__main__":
