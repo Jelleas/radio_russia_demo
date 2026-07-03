@@ -7,9 +7,18 @@ def depth_first_memory_graph() -> None:
     with open("results/depth_first/depth_first.json", 'r') as input_file:
         result = json.load(input_file)
 
+    sizes = result['states_sizes']
+
     ax.set_title('Depth First Memory Growth')
 
-    ax.plot(result['states_sizes'], label='States')
+    hb = ax.hexbin(
+        range(len(sizes)),
+        sizes,
+        gridsize=(80, max(sizes) + 1),
+        cmap='viridis',
+        mincnt=1,
+    )
+    fig.colorbar(hb, ax=ax, label='Frequency')
     ax.set_xlabel('Considered States')
     ax.set_ylabel('Number of States')
     fig.savefig("results/depth_first/depth_first_memory.png")
