@@ -11,7 +11,7 @@ def breadth_first_memory_graph() -> None:
 
     ax.plot(result['states_sizes'], label='States')
     ax.set_xlabel('Considered States')
-    ax.set_ylabel('Number of States')
+    ax.set_ylabel('Number of States in Memory')
     fig.savefig("results/breadth_first/breadth_first_memory.png")
 
 

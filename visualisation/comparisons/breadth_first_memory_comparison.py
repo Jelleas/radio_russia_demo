@@ -17,7 +17,7 @@ def breadth_first_memory_comparison() -> None:
     ax.legend(loc='upper right')
 
     ax.set_xlabel('Considered States')
-    ax.set_ylabel('Number of States')
+    ax.set_ylabel('Number of States in Memory')
     fig.savefig("results/comparisons/breadth_first_memory_comparison.png")
 
 

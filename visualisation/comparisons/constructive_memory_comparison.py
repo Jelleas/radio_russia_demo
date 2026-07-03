@@ -16,7 +16,7 @@ def constructive_memory_comparison() -> None:
     ax.plot(depth_result['states_sizes'], label='States')
 
     ax.set_xlabel('Considered States')
-    ax.set_ylabel('Number of States')
+    ax.set_ylabel('Number of States in Memory')
     fig.savefig("results/comparisons/constructive_memory_comparison.png")
 
 

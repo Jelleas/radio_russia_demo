@@ -20,7 +20,7 @@ def depth_first_memory_graph() -> None:
     )
     fig.colorbar(hb, ax=ax, label='Frequency')
     ax.set_xlabel('Considered States')
-    ax.set_ylabel('Number of States')
+    ax.set_ylabel('Number of States in Memory')
     fig.savefig("results/depth_first/depth_first_memory.png")
 
 
