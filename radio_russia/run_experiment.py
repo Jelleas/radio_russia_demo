@@ -1,7 +1,7 @@
 """Reproduce an experiment from its JSON configuration file.
 
 Usage:
-    python run_experiment.py experiments/depth_first/depth_first_experiment.json
+    python -m radio_russia.run_experiment experiments/depth_first/depth_first_experiment.json
 """
 import argparse
 import importlib.util

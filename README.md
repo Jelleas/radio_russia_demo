@@ -17,6 +17,11 @@ pip install -e .
 Na installatie is de package te draaien met `python -m radio_russia`, met twee
 subcommando's: `algorithm` en `experiment`.
 
+**Let op:** commando's (en de standalone visualisatiescripts) verwachten dat je
+ze vanuit de root van de repository draait, aangezien paden naar `data/`,
+`experiments/` en `results/` relatief zijn ten opzichte van de working
+directory.
+
 Een los algoritme draaien op een dataset:
 
 ```
@@ -45,7 +50,6 @@ python visualisation/depth_first/depth_first_memory_graph.py
 De hierop volgende lijst beschrijft de belangrijkste mappen en files in het project, en waar je ze kan vinden:
 
 - **/radio_russia**: bevat alle code van dit project
-  - **/radio_russia/\_\_main\_\_.py**: entrypoint voor `python -m radio_russia`
   - **/radio_russia/algorithms**: bevat de code voor algoritmes
   - **/radio_russia/classes**: bevat de drie benodigde classes voor deze case
   - **/radio_russia/visualisation**: bevat de bokeh code voor de visualisatie

@@ -10,8 +10,7 @@ from radio_russia.algorithms import breadth_first as bf
 from radio_russia.algorithms import hillclimber as hc
 from radio_russia.algorithms import simulatedannealing as sa
 from radio_russia.visualisation import visualise as vis
-
-from run_experiment import run_experiment
+from radio_russia.run_experiment import run_experiment
 
 ALGORITHMS = [
     "random", "greedy", "random-greedy", "depth-first", "branch-and-bound",
