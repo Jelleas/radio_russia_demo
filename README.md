@@ -34,7 +34,7 @@ De experimenten in `/experiments` zijn reproduceerbaar via hun bijbehorende
 JSON-configuratiebestand:
 
 ```
-python -m radio_russia experiment experiments/depth_first/depth_first_experiment.json
+python -m radio_russia experiment experiments/depth_first/depth_first.json
 ```
 
 De resultaten van een experiment worden geplot door de bijbehorende scripts in

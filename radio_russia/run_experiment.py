@@ -1,10 +1,10 @@
-"""Reproduce an experiment from its JSON configuration file.
+"""Reproduce a run from its JSON configuration file.
 
 Usage:
-    python -m radio_russia.run_experiment experiments/depth_first/depth_first_experiment.json
+    python -m radio_russia.run_experiment experiments/depth_first/depth_first.json
 """
 import argparse
-import importlib.util
+import importlib
 import json
 from pathlib import Path
 from types import ModuleType
@@ -13,13 +13,8 @@ from radio_russia.classes import graph, transmitters
 
 
 def load_module(json_path: Path) -> ModuleType:
-    module_path = json_path.with_suffix(".py")
-    spec = importlib.util.spec_from_file_location(module_path.stem, module_path)
-    if spec is None or spec.loader is None:
-        raise ImportError(f"Could not load module from {module_path}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    folder = json_path.parent.name
+    return importlib.import_module(f"experiments.{folder}.{folder}_experiment")
 
 
 def run_experiment(json_path: Path) -> None:
@@ -34,18 +29,17 @@ def run_experiment(json_path: Path) -> None:
 
     module = load_module(json_path)
 
-    for run in config["runs"]:
-        function = getattr(module, run["function"])
-        params = run.get("params", {})
-        print(f"Running {run['function']}...")
-        function(test_graph, cost_scheme, scheme=scheme, **params)
+    function = getattr(module, config["function"])
+    params = config.get("params", {})
+    print(f"Running {config['function']}...")
+    function(test_graph, cost_scheme, scheme=scheme, **params)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("config", type=Path,
-                         help="Path to an experiment JSON file, e.g. "
-                              "experiments/depth_first/depth_first_experiment.json")
+                         help="Path to a run JSON file, e.g. "
+                              "experiments/depth_first/depth_first.json")
     args = parser.parse_args()
 
     run_experiment(args.config)
